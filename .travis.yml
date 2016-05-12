@@ -16,6 +16,9 @@ install:
   - go get gopkg.in/libgit2/git2go.v23
   - go get github.com/plouc/go-gitlab-client
 
+after_script:
+  - find . -type f
+
 deploy:
   provider: releases
   api_key:

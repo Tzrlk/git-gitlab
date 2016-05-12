@@ -16,14 +16,14 @@ install:
   - go get gopkg.in/libgit2/git2go.v23
   - go get github.com/plouc/go-gitlab-client
 
-after_script:
-  - find . -type f
-
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: Qd6v5WVPOd4b3KbmRa3KqDoTSc6RyL5/i3cLQ17kNEaWL2SMOrec9d6/yxRXNIMV27BerASwP3tSvUxsgduQcqNoZTfPRLycGv1i8sojKeYN6CYoSu4gTctCpM+mtq1xOb2bwHoBdXOwWobdPgaEbw1GiGYPuUmzeTUguoGvF5FE5khTXZguei28HEQshMv2GFBF5mIkgK2ThrjXA0fqi0HNkq/XxBCRnTVF2s5ksuMSAyv/hOYTgMst+LDwAOxmWqZpiucACqbj0aVI4gmKbQY4BQSUssfrt4ybrflmjeom6YcSjkJA96FGQigJU2p2b+B0OpgBeIfgJGzt6mefhccaJsF4yuGj8IrrN0pX5WDQZNTkVXFlXt1o2qsSqdo8QOyb5NhAc/0SvLg5Vy3GUnTM4+diFbsCpZRk9NWiphrwgLYLhd7pgVQ+3YYgzNS/gC92l3jEbxRpkhIljqlK4cYCNEsjbkRmrASLKARaXlE1JM7qqiZ4iQzid/fn1TayipPHa/o+cG3LQ5escAMyDO5D91J7dGHFWmi1O9Ho/BgY1/Q8V8lH+xuj/DB1SJ6/cszoTDQTrYn7PTzyW+LujLE8zTVSqAxxhqfqFilWtYYgFZxL5I+6sw4RRPbbEvthZxK//Z07fb2l+hBTJ1i7TiGM0YIeXVhasUep5fqcSzU=
-  file: ! '*.exe'
+  file:
+    - build/git-lab
+    - man/git-lab.1.html
   on:
     repo: Tzrlk/git-gitlab
     tags: true

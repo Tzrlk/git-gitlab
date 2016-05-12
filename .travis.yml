@@ -1,17 +1,27 @@
 language: go
 
 go:
-    - 1.5
-    - tip
+  - 1.5
+  - tip
 
 install:
-    - go get github.com/codegangsta/cli
-    - cd "${HOME}"
-    - wget -O libgit2-0.23.4.tar.gz https://github.com/libgit2/libgit2/archive/v0.23.4.tar.gz
-    - tar -xzvf libgit2-0.23.4.tar.gz
-    - cd libgit2-0.23.4 && mkdir build && cd build
-    - cmake -DTHREADSAFE=ON -DBUILD_CLAR=OFF -DCMAKE_C_FLAGS=-fPIC -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && sudo make install
-    - sudo ldconfig
-    - cd "${TRAVIS_BUILD_DIR}"
-    - go get gopkg.in/libgit2/git2go.v23
-    - go get github.com/plouc/go-gitlab-client
+  - go get github.com/codegangsta/cli
+  - cd "${HOME}"
+  - wget -O libgit2-0.23.4.tar.gz https://github.com/libgit2/libgit2/archive/v0.23.4.tar.gz
+  - tar -xzvf libgit2-0.23.4.tar.gz
+  - cd libgit2-0.23.4 && mkdir build && cd build
+  - cmake -DTHREADSAFE=ON -DBUILD_CLAR=OFF -DCMAKE_C_FLAGS=-fPIC -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && sudo make install
+  - sudo ldconfig
+  - cd "${TRAVIS_BUILD_DIR}"
+  - go get gopkg.in/libgit2/git2go.v23
+  - go get github.com/plouc/go-gitlab-client
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Qd6v5WVPOd4b3KbmRa3KqDoTSc6RyL5/i3cLQ17kNEaWL2SMOrec9d6/yxRXNIMV27BerASwP3tSvUxsgduQcqNoZTfPRLycGv1i8sojKeYN6CYoSu4gTctCpM+mtq1xOb2bwHoBdXOwWobdPgaEbw1GiGYPuUmzeTUguoGvF5FE5khTXZguei28HEQshMv2GFBF5mIkgK2ThrjXA0fqi0HNkq/XxBCRnTVF2s5ksuMSAyv/hOYTgMst+LDwAOxmWqZpiucACqbj0aVI4gmKbQY4BQSUssfrt4ybrflmjeom6YcSjkJA96FGQigJU2p2b+B0OpgBeIfgJGzt6mefhccaJsF4yuGj8IrrN0pX5WDQZNTkVXFlXt1o2qsSqdo8QOyb5NhAc/0SvLg5Vy3GUnTM4+diFbsCpZRk9NWiphrwgLYLhd7pgVQ+3YYgzNS/gC92l3jEbxRpkhIljqlK4cYCNEsjbkRmrASLKARaXlE1JM7qqiZ4iQzid/fn1TayipPHa/o+cG3LQ5escAMyDO5D91J7dGHFWmi1O9Ho/BgY1/Q8V8lH+xuj/DB1SJ6/cszoTDQTrYn7PTzyW+LujLE8zTVSqAxxhqfqFilWtYYgFZxL5I+6sw4RRPbbEvthZxK//Z07fb2l+hBTJ1i7TiGM0YIeXVhasUep5fqcSzU=
+  file: ! '*.exe'
+  on:
+    repo: Tzrlk/git-gitlab
+    tags: true
+
